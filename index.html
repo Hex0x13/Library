@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library</title>
+  <script src="index.js" defer></script>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header>
+    <h1>Library</h1>
+  </header>
+  <main>
+    <button class="add-books">&plus; add books</button>
+    <section class="books">
+    </section>
+  </main>
+  <div class="overlay"></div>
+  <div class="adding-book">
+    <h2>Add Book</h2>
+    <form>
+      <input type="text" name="title" id="title" placeholder="Title" required>
+      <input type="text" name="author" id="author" placeholder="Author" required>
+      <input type="number" name="page" id="page" min="1" max="10000" placeholder="Page" reque>
+      <label class="read-checkbox">
+        <input type="checkbox" id="check-read" name="read">
+        Have you read it&quest;
+      </label>
+      <button class="submit-button" type="button">Submit</button>
+    </form>
+  </div>
+  <footer></footer>
+</body>
+
+</html>
