@@ -16,6 +16,7 @@ html,
 
 body {
   height: 99.9vh;
+  overflow: hidden;
 }
 
 header {
@@ -59,7 +60,7 @@ main {
   display: flex;
   gap: 50px;
   flex-wrap: wrap;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .add-books:hover {
@@ -107,20 +108,24 @@ main {
   font-size: 12px;
 }
 
-.adding-book {
-  position: fixed;
+.adding-book[open] {
   display: flex;
   flex-direction: column;
   background-color: burlywood;
   align-items: center;
+  border: 1px solid black;
   border-radius: 10px;
-  top: 50%;
-  left: 50%;
   width: 260px;
   height: 290px;
-  transform: translate(-50%, -50%);
-  visibility: hidden;
   z-index: 100;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.adding-book::backdrop {
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .adding-book form {
@@ -211,20 +216,6 @@ input[type="number"] {
 input[type="text"]:focus,
 input[type="number"]:focus {
   outline: rgba(54, 54, 54, 0.8) solid 1px;
-}
-
-.overlay {
-  background-color: rgba(0, 0, 0, 0.3);
-  height: 100%;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  visibility: hidden;
-}
-
-.adding-book.show, .overlay.show {
-  visibility: visible;
 }
 
 .read,

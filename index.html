@@ -17,21 +17,20 @@
     <section class="books">
     </section>
   </main>
-  <div class="overlay"></div>
-  <div class="adding-book">
+  <footer></footer>
+  <dialog class="adding-book">
     <h2>Add Book</h2>
-    <form>
+    <form method="dialog">
       <input type="text" name="title" id="title" placeholder="Title" required>
       <input type="text" name="author" id="author" placeholder="Author" required>
-      <input type="number" name="page" id="page" min="1" max="10000" placeholder="Page" reque>
+      <input type="number" name="page" id="page" min="1" max="10000" placeholder="Page" required>
       <label class="read-checkbox">
         <input type="checkbox" id="check-read" name="read">
         Have you read it&quest;
       </label>
-      <button class="submit-button" type="button">Submit</button>
+      <button class="submit-button" type="submit">Submit</button>
     </form>
-  </div>
-  <footer></footer>
+  </dialog>
 </body>
 
 </html>

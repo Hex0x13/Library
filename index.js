@@ -1,18 +1,18 @@
 const form = document.querySelector('form');
 const booksContainer = document.querySelector('.books');
 const addBooksButton = document.querySelector('.add-books');
-const addingBook = document.querySelector('.adding-book');
-const overlay = document.querySelector('.overlay');
-const inputs = addingBook.querySelectorAll('input');
+const modal = document.querySelector('.adding-book');
+const inputs = modal.querySelectorAll('input');
 const submitButton = document.querySelector('.submit-button');
 
-const titleInput = addingBook.querySelector('#title');
-const authorInput = addingBook.querySelector('#author');
-const pageInput = addingBook.querySelector('#page');
-const checkRead = addingBook.querySelector('#check-read');
+const titleInput = modal.querySelector('#title');
+const authorInput = modal.querySelector('#author');
+const pageInput = modal.querySelector('#page');
+const checkRead = modal.querySelector('#check-read');
 
 addBooksButton.onclick = newBook;
 submitButton.onclick = addBookToLib;
+modal.onclick = closeAddBook;
 
 let library = {};
 let bookID = 1;
@@ -25,39 +25,39 @@ class Book {
     this.read = checked;
   }
 }
-
 function openAddBook(){
-  addingBook.classList.add('show');
-  overlay.classList.add('show');
+  modal.showModal();
 }
 
-function closeAddBook(){
-  addingBook.classList.remove('show');
-  overlay.classList.remove('show');
+function closeAddBook(e){
+  const dialogDimensions = modal.getBoundingClientRect()
+  if (
+    e.clientX < dialogDimensions.left ||
+    e.clientX > dialogDimensions.right ||
+    e.clientY < dialogDimensions.top ||
+    e.clientY > dialogDimensions.bottom
+  ) {
+    modal.close()
+  }
 }
 
 function newBook(event) {
   openAddBook();
   event.stopPropagation();
-  overlay.addEventListener('click', closeAddBook, {once: true});
 }
 
-function addBookToLib(){
-  if (form.checkValidity() && pageInput.value){
-    closeAddBook();
-    const book = new Book(
-      titleInput.value,
-      authorInput.value, 
-      pageInput.value,
-      checkRead.checked
-    );
-    titleInput.value = "";
-    authorInput.value = "";
-    pageInput.value = "";
-    checkRead.checked = false;
-    library[bookID++] = book;
-    displayBooks();
-  }
+function addBookToLib(event){
+  event.preventDefault();
+  const book = new Book(
+    titleInput.value,
+    authorInput.value, 
+    pageInput.value,
+    checkRead.checked
+  );
+  library[bookID++] = book;
+  modal.querySelector('form').reset();
+  modal.close();
+  displayBooks();
 }
 
 function displayBooks() {
